@@ -5,6 +5,7 @@ const dotenv = require("dotenv").config();
 const colors = require("colors");
 const { databaseConnect } = require("../utils/database.connect");
 
+const productsRoute = require("../routes/product.routes")
 
 // Database
 databaseConnect();
@@ -17,7 +18,8 @@ app.use(cors());
 app.use(express.json());
 
 
-
+// routes
+app.use('/api', productsRoute);
 
 
 app.get("/", (req, res) => {
