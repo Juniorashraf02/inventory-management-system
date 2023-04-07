@@ -3,6 +3,11 @@ const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv").config();
 const colors = require("colors");
+const { databaseConnect } = require("../utils/database.connect");
+
+
+// Database
+databaseConnect();
 
 // server
 const port = process.env.PORT || 7000;
@@ -10,6 +15,10 @@ const port = process.env.PORT || 7000;
 // middleware
 app.use(cors());
 app.use(express.json());
+
+
+
+
 
 app.get("/", (req, res) => {
   return res
@@ -22,5 +31,5 @@ app.all("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`server is running on port ${port}`.bgBlue);
+  console.log(`server is running on port ${port}`.bgMagenta);
 });
