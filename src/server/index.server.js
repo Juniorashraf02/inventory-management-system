@@ -19,7 +19,7 @@ app.use(express.json());
 
 
 // routes
-app.use('/api', productsRoute);
+app.use('/api/product', productsRoute);
 
 
 app.get("/", (req, res) => {
