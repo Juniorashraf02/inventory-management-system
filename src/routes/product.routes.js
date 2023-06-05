@@ -1,23 +1,26 @@
 const express = require("express");
-const {
-  createProduct,
-  getProducts,
-  updateProduct,
-  bulkUpdateProducts,
-  deleteProducts,
-} = require("../controller/product.controller");
 const router = express.Router();
 
-// router.post("/", createProduct).get("/", getProducts);
+const { getProducts } = require("../controller/ProductController/getProduct");
+const {
+  createProduct,
+} = require("../controller/ProductController/createProduct");
+const {
+  updateProduct,
+} = require("../controller/ProductController/updateProduct");
+const {
+  bulkUpdateProducts,
+} = require("../controller/ProductController/bulkUpdate");
+const {
+  deleteProducts,
+} = require("../controller/ProductController/deleteProduct");
+
 router.route("/").post(createProduct).get(getProducts);
 
 router.patch("/bulk-update", bulkUpdateProducts);
 
 router.delete("/delete/:id", deleteProducts);
 
-router.patch("/:id", updateProduct);
-
-
-// router.route("/:id").patch(updateProduct).delete(deleteProducts)
+router.patch("update/:id", updateProduct);
 
 module.exports = router;
