@@ -1,3 +1,4 @@
+const { json } = require("express");
 const Product = require("../models/product.schema");
 
 exports.createProduct = (req, res) => {
@@ -85,21 +86,25 @@ exports.bulkUpdateProducts = async (req, res, next) => {
   }
 };
 
-// exports.deleteProducts = async (res, req, next) => {
-//   try {
-//     const { id } = req.params;
-//     const result = await Product.deleteOne({ _id: id });
-//     return res.status(200).send({
-//       message: "product deleted!",
-//     });
-//   } catch (error) {
-//     return res.status(400).send({
-//       message: "something went wrong!",
-//     });
-//   }
-// };
-exports.deleteProducts = async (res, req, next) => {
-  return res.send({
-    msg: "hele"
-  })
+exports.deleteProducts = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await Product.deleteOne({ _id: id });
+
+    if (!result.deletedCount)
+      return res.status(400).json({
+        status: "Failed",
+        message: "Product doesn't exist",
+      });
+
+    res.status(201).json({
+      message: "Product deleted successfully...!!!",
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status: "failed",
+      message: "data is not deleted",
+      error: error.message,
+    });
+  }
 };

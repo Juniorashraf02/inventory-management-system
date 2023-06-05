@@ -13,9 +13,7 @@ router.route("/").post(createProduct).get(getProducts);
 
 router.patch("/bulk-update", bulkUpdateProducts);
 
-router.delete("/delete", (req, res, next)=>{
-    return res.send("hello")
-});
+router.delete("/delete/:id", deleteProducts);
 
 router.patch("/:id", updateProduct);
 
